@@ -1,0 +1,28 @@
+#!/usr/bin/python3
+from sys import argv, setrecursionlimit
+
+numbers = []
+setrecursionlimit(16485773)
+def main():
+    with open(argv[1], 'r', encoding="utf-8") as file:
+        for line in file:
+            numbers.append(int(line.replace('\n', '')))
+
+    for number in numbers:
+        denominator = 2
+        limit = int(number / 2)
+        first_number, second_number = factor(number, denominator, limit)
+        print("{}={}*{}".format(number, first_number, second_number))
+
+
+def factor(number, denominator, limit):
+    if denominator == (limit + 1):
+        return (0, 0)
+    if number % denominator == 0:
+        remainder = number / denominator
+        return (int(remainder), int(denominator))
+    return factor(number, denominator + 1, limit)
+
+
+if __name__ == '__main__':
+    main()
