@@ -1,20 +1,37 @@
 #!/usr/bin/python3
-from sys import argv, setrecursionlimit
+from sys import argv
+import time
+from math import sqrt
 
 numbers = []
 
 
 def main():
-    with open(argv[1], 'r', encoding="utf-8") as file:
-        for line in file:
-            numbers.append(int(line.replace('\n', '')))
+
+    if len(argv) != 2:
+        print("Usage: factors <file>")
+        exit()
+
+    try:
+        with open(argv[1], 'r', encoding="utf-8") as file:
+            for line in file:
+                numbers.append(int(line.replace('\n', '')))
+
+    except FileNotFoundError:
+        print("File not found")
+        exit()
+
+    start = time.time()
 
     for number in numbers:
         denominator = 2
-        limit = int(number / 2)
+        limit = round(sqrt(number))
         first_number, second_number = factor(number, denominator, limit)
         print("{}={}*{}".format(number, first_number, second_number))
 
+    if time.time() - start > 5:
+        print("Time out")
+        exit()
 
 def factor(number, denominator, limit):
     while (denominator <= limit):
