@@ -2,7 +2,8 @@
 from sys import argv, setrecursionlimit
 
 numbers = []
-setrecursionlimit(16485773)
+
+
 def main():
     with open(argv[1], 'r', encoding="utf-8") as file:
         for line in file:
@@ -16,12 +17,12 @@ def main():
 
 
 def factor(number, denominator, limit):
-    if denominator == (limit + 1):
-        return (0, 0)
-    if number % denominator == 0:
-        remainder = number / denominator
-        return (int(remainder), int(denominator))
-    return factor(number, denominator + 1, limit)
+    while (denominator <= limit):
+        if number % denominator == 0:
+            remainder = number / denominator
+            return (int(remainder), int(denominator))
+        denominator += 1
+    return (0, 0)
 
 
 if __name__ == '__main__':
