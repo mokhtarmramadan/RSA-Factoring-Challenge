@@ -34,6 +34,7 @@ def main():
         print("Time out")
         exit()
 
+
 def factor(number, denominator, limit):
     while (denominator <= limit):
         if number % denominator == 0:
